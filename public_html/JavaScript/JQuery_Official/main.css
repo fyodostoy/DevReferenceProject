@@ -1,0 +1,55 @@
+body {
+  font-family: "Open Sans", Calibri, Arial, sans-serif;
+  font-size: 16px;
+  color: #444;
+  font-weight: 400;
+  line-height: 1.8em; }
+  @media only screen and (max-width: 800px) {
+    body {
+        font-size: 15px; } 
+  }
+  @media only screen and (max-width: 500px) {
+    body {
+      font-size: 14px; } 
+  }
+  .bgred {
+      background-color: red;
+  }
+  .bgblue {
+      background-color:  highlight;
+  }
+  .bgorange {
+      background-color:  darkorange;
+  }
+  .brd-green {
+      border:  darkgreen solid 3px;
+  }
+  
+  h1.bgblue:hover {
+      color: yellow;
+  }
+  
+  .bgorange.brd-green {
+      background-color:  springgreen;
+      color: red;
+  }
+  
+  
+  .randomClass {
+      
+  }
+  
+  
+  .wfont {
+      color:  #eee;
+      font-size: 2em;
+      background-color: #000;
+  }
+    .rfont {
+      color:  red;
+      font-size: 2.2em;
+      background-color:  darkslateblue;
+  }
+  .sh {
+      
+  }
