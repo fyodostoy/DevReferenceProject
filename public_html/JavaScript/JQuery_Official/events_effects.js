@@ -2,16 +2,16 @@
 $('#mainA').on('click', 'button', logEvent);
 
 function logEvent(event) {
-    console.log(event.target);
     console.dir(event);
+    console.log(event.target);
 }
 
 $('table').on('click', 'td', sayName);
 function sayName(event) {
-    console.log(event);
-    console.log(event.target);
-    console.log(event.target.textContent);
-    console.log( $(this).text() );
+    console.log(event); //m.Event { ... }
+    console.log(event.target); // <td>a1</td>
+    console.log(event.target.textContent); // a1
+    console.log( $(this).text() ); // a1
 }
 $('#hide_tabel').on('click', function() {
     $('table').slideUp(1000);

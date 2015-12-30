@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <script>
+            function lg(o){
+                console.log(o);
+            }
+            
+            var comp = ['Bach', 'Hyden', 'Mozart']; 
+            
+            lg(comp);  //["Bach", "Hyden", "Mozart"]
+            
+            comp.forEach(function(item, index){
+                lg(item + ' ' +index); // Bach 0 Hyden 1 etc.
+            });
+            
+            var newL = comp.push('Berlioz');
+            lg(newL); //4
+            lg(comp); //["Bach", "Hyden", "Mozart", "Berlioz"]
+            var lastC = comp.pop();
+            lg(lastC); //Berlioz
+            lg(comp); //["Bach", "Hyden", "Mozart"]
+            
+            var shft = comp.shift(); //Remove from the front of an Array
+            lg(shft); // Bach
+            lg(comp); //["Hyden", "Mozart"]
+            
+            var newLn = comp.unshift('Albinoni');
+            lg(newLn); // 3
+            lg(comp); //["Albinoni", "Hyden", "Mozart"]
+            
+            lg(comp.indexOf('Mozart')); // 2
+            
+            var remItem = comp.splice(1, 1);
+            lg(remItem); //["Hyden"]
+            lg(comp); // ["Albinoni", "Mozart"]
+            
+            var copItem = comp.slice(1, 2);
+            lg(copItem); //["Mozart"]
+            lg(comp); //["Albinoni", "Mozart"]
+            
+            
+            var concerto = ['violin', 'piano', 'cello'];
+            var sonata = ['piano', 'flute'];
+            //comp.concat('tuba')
+            lg(concerto);
+            
+            //The concat() method returns a new array
+            var newComp = comp.concat(concerto); // shallow copy: ["Albinoni", "Mozart", "violin", "piano", "cello"]
+            lg(newComp);
+            lg(comp); //["Albinoni", "Mozart"]
+            var secComp = comp.push(sonata);
+            lg(secComp); //3 
+            lg(comp); //["Albinoni", "Mozart", Array[2]]
+            lg(comp.toString()); //Albinoni,Mozart,piano,flute
+            //The string conversions of all array elements are joined into one string
+            lg(comp.join()); //Albinoni,Mozart,piano,flute
+            lg(comp.join(' - ')); //Albinoni - Mozart - piano,flute
+            lg(comp.indexOf('Mozart'));
+            lg(comp.reverse()); //[Array[2], "Mozart", "Albinoni"]
+            
+
+
+            
+            var arr = ['a', 'b', 'c'];
+            var eArr = arr.entries();
+            lg (eArr.next().value); //[0, "a"]
+            
+            function isBigEnough(value) {
+              return value >= 10;
+            }
+            var filtered = [12, 5, 8, 130, 44].filter(isBigEnough); // filtered is [12, 130, 44]
+
+            
+        </script>
+    </body>
+</html>

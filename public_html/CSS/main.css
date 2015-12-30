@@ -1,0 +1,193 @@
+/* =============================================== */
+/* CHAPTER 2 - Mobile-First Web Development */
+/* =============================================== */
+
+// BAD: still downloaded by the browser and held in the cache even though they weren't displayed. 
+E { background-image: url('huge-image.jpg'); } 
+    @media (max-width: 600px) {
+    E { display: none; }
+}
+
+//first make a basic style sheet, which is applied to all browsers, including mobile, 
+//then add assets and features for users with larger screens
+
+@media (min-width: 600px) {
+    E { background-image: url('huge-image.jpg'); }
+}
+/* This approach can be extrapolated to loading entire style sheets:
+<link href="basic.css" rel="stylesheet">
+<link href="desktop.css" rel="stylesheet" media="(min-width: 600px)">
+*/
+
+
+/* =============================================== */
+/* CHAPTER 3 - attribute selector */
+/* =============================================== */
+E[attr] {color: red;} /* Simple Attribute Selector */ 
+E[attr='value'] {color: red;} /* Exact Attribute Value Selector */
+E[attr~='value'] {color: red;} /* Partial Attribute Value Selector */ 
+E[attr|='value'] {color: red;} /* Language Attribute Selector */
+
+a[rel] { color: red; } // all with rel attribute
+a[rel='friend'] { color: red; } //rel="friend"
+a[rel~='friend'] { color: red; } //rel="friend met" AND rel="friend"
+
+
+/* <li><a href="http://example.com/" title="Image Library">Example</a></li>
+<li><a href="http://example.com/" title="Free Image Library">Example</a></li>
+<li><a href="http://example.com/" title="Free Sound Library">Example</a></li>*/
+
+//Beginning Selector
+E[attr^='value'] {} //  elements whose chosen attribute begins with the string supplied
+a[title^='image'] {} //  title="Image Library"
+
+// <a href="http://example.com/">hyperlink</a>.</p>
+// usefull for chosing an external URL
+a[href^='http'] {
+    background: url('link.svg') no-repeat left center; 
+    display: inline-block;
+    padding-left: 20px;
+}
+a[href^='mailto'] { background-image: url('email.svg'); } 
+a[href^='ftp'] { background-image: url('folder.svg'); } 
+a[href^='https'] { background-image: url('lock.svg'); }
+
+// <time datetime="2015-03-14">March 14/time>
+[datetime^='2015'] {}
+
+// Ending Selector
+a[title$='library'] {}
+
+a[href$='.pdf'] { background-image: url('pdf.svg'); }
+a[href$='.doc'] { background-image: url('word.svg'); }
+a[href$='.rss'] { background-image: url('feed.svg'); }
+
+// Arbitrary Selector: anywhere inside the specified attribute string
+a[title*='image'] {} // title="Image Library" AND title="Free Image Library"
+// diff with E[attr~='value']: Arbitrary Selector works with substrings as well, partial does NOT
+a[title*='ima'] {} // title="Image Library" AND title="Free Image Library"
+
+//  <a href="http://example.com/example.pdf?foo=bar">Example</a>
+a[href*='.pdf'] { background-image: url('pdf.svg'); }
+
+// Chaining selectors
+//<p><a href="http://example.com/folder1/file.pdf">Example</a></p>
+//<p><a href="http://example.com/folder2/file.pdf">Example</a></p>
+a[href^='http://'][href*='/folder2/'][href$='.pdf'] {}
+
+E + F {} /* Adjacent Sibling Combinator */
+// any element (F) that is immediately preceded by element (E) 
+// on the same level of the document tree
+
+E ~ F {} /* General Sibling Combinator */
+// any element (F) that is preceded by element (E) on the same level of the tree, 
+// regardless of whether it is immediately adjacent.
+
+
+/* =============================================== */
+/*  Chapter 4: Pseudo-Classes and Pseudo-Elements  */
+/* =============================================== */
+
+
+/* structural pseudo-classes */
+
+E:first-child {} //Since CSS2
+// 11 new in CSS3
+
+/*:nth-child(), selects an element based on its position in a count of the total 
+number of children in its parent element; :nth-of-type() bases its count not on 
+the total children, but only on those of the specified element type*/
+E:nth-child(n) {}
+E:nth-of-type(n) {}
+E:nth-child(2n) {}
+E:nth-of-type(2n) {}
+
+E:nth-child(even) {} // or odd
+
+// same as above but count in reverse
+E:nth-last-child() {}
+E:nth-last-of-type() {}
+
+E:first-of-type {}
+E:last-child {}
+E:last-of-type {}
+E:last-child {}
+E:first-child {}
+
+tbody td:first-of-type { text-align: left; }
+
+/* Other Pseudo-Classes */
+:target {}
+:empty {}
+:root {}
+:not()
+
+/*
+<div>
+    <p>Lorem ipsum dolor sit amet...</p>
+    <p>Nunc consectetur tempor justo...</p>
+    <p>Nunc porttitor malesuada cursus...</p>
+</div>
+*/
+
+p { font-style: italic; }
+p:first-child { font-style: normal; }
+
+// same as 
+
+p:not(:first-child) { font-style: italic; }
+
+
+/* UI Element States */
+:checked {}
+:disabled {}
+:enabled {}
+
+input[type='text']:disabled { border: 1px dotted gray; }
+input[type='text']:enabled { border: 1px solid black; }
+
+/* Pseudo-elements */
+::first-line {}
+::first-letter {}
+::after {}
+::before {}
+
+
+/* =============================================== */
+/*              Chapter 5: Web Fonts               */
+/* =============================================== */
+
+/* =============================================== */
+/*              Chapter 14: Web Fonts              */
+/* =============================================== */
+#bbox {
+    background-color: yellow;
+    transition: background-color 1s;
+}
+#bbox:hover {
+    background-color: red;
+}
+
+h1 {
+   font-size: 150%;
+   transition-property: font-size;
+   transition-duration: 2s;
+   transition-timing-function: ease-out;
+   // transition-timing-function: cubic-bezier(0.6, 0.1, 0.15, 0.7);
+   // transition-timing-function: steps(4);
+   transition-delay: 250ms;
+}
+
+// short hand: E { transition: property duration timing-function delay; }
+h1 { transition: padding-left 300ms ease-out 250ms; }
+h1:hover { padding-left: 10px; }
+
+
+#container { display: flex; background-color:  beige; /*flex-direction: column;*/}
+#a {background-color:  darkgrey;}
+#b {background-color:  darkkhaki;}
+#d {background-color:  darkblue;}
+#a { order: 2; padding: 20px; background-color:  chocolate;}
+#b, #d { order: 3; padding: 20px;}
+#c { order: 1; padding: 20px;}
+.flex-item:nth-child(even) { background-color: gray; }

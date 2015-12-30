@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <script>
+////////////// MODULE PATTERN 
+            var myNamespace = (function () {
+
+              var myPrivateVar, myPrivateMethod;
+
+              // A private counter variable
+              myPrivateVar = 0;
+
+              // A private function which logs any arguments
+              myPrivateMethod = function( foo ) {
+                  console.log( foo );
+              };
+
+              return {
+
+                // A public variable
+                myPublicVar: "foo",
+
+                // A public function utilizing privates
+                myPublicFunction: function( bar ) {
+
+                  // Increment our private counter
+                  myPrivateVar++;
+
+                  // Call our private method using bar
+                  myPrivateMethod( bar );
+
+                }
+              };
+
+            })();  
+///////////////////////// The Revealing Module Pattern
+            var myRevealingModule = (function () {
+
+                    var privateVar = "Ben Cherry",
+                        publicVar = "Hey there!";
+
+                    function privateFunction() {
+                        console.log( "Name:" + privateVar );
+                    }
+
+                    function publicSetName( strName ) {
+                        privateVar = strName;
+                    }
+
+                    function publicGetName() {
+                        privateFunction();
+                    }
+
+
+                    // Reveal public pointers to
+                    // private functions and properties
+
+                    return {
+                        setName: publicSetName,
+                        greeting: publicVar,
+                        getName: publicGetName
+                    };
+
+                })();
+
+            myRevealingModule.setName( "Paul Kinlan" );
+///////////////////////
+            
+            function wr(o){
+                document.write(o +'<br><br>');
+            }
+            
+            var boatModule = (function(){
+                var brand='Bavaria';
+                var len=30;
+                function chLen(l) {
+                    len=l;
+                }
+                return {
+                    name: 'Freya',
+                    getInfo: function(){
+                        return brand + ' - ' + len + ' foot - ' + this.name;
+                    },
+                    changeLen : chLen,
+                    setBrand: function(b) {
+                        brand=b;
+                    }
+                }
+            })();
+            
+            var carMod = (function(){
+                var pw=156;
+                var brnd='BMW';
+                function chPW(p){
+                    //(p===pw) ? alert('correct') : alert('wrong');
+                    
+                }
+                return {
+                    brand : brnd,
+                    checkPw : chPW
+                };              
+            })();
+            
+            wr(carMod.brand);
+            wr(carMod.pw);
+            carMod.checkPw(156);
+            
+            //wr(brand);
+            wr(boatModule.brand);
+            wr(boatModule.name);
+            wr(boatModule.getInfo());
+            
+
+            boatModule.changeLen(57);
+            boatModule.setBrand('Catalina');
+          
+            
+            
+            
+            wr(boatModule.brand);
+            wr(boatModule.name);
+            wr(boatModule.getInfo());
+            
+            
+            
+            
+            
+            var testModule = (function () {
+ 
+  var counter = 0;
+ 
+  return {
+ 
+    incrementCounter: function () {
+      return counter++;
+    },
+    getCounter: function() {
+        return counter;
+    },
+ 
+    resetCounter: function () {
+      console.log( "counter value prior to reset: " + counter );
+      counter = 0;
+    }
+  };
+ 
+})();
+ 
+// Usage:
+ 
+// Increment our counter
+console.log('1st ' + testModule.incrementCounter());
+console.log('-> ' + testModule.getCounter());
+
+console.log('2 ' + testModule.incrementCounter());
+console.log('-> ' + testModule.getCounter());
+
+// Check the counter value and reset
+// Outputs: counter value prior to reset: 1
+testModule.resetCounter();
+            
+        </script>    
+    </body>
+</html>

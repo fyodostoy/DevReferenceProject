@@ -27,6 +27,7 @@ function Kayak(brand, length) {
 Kayak.prototype.print = function() {
     return this.brand ;
 };
+var vscKayak = new Kayak('Nordic', 12);
 
 // 3 - Object.create
 var loki = Object.create(sailboat);
@@ -48,7 +49,6 @@ loki.numSails = 2;
 console.log(sailboat); //Object {name: "Freya", brand: "Bavaria", engine: Object}
 console.log(Object.getPrototypeOf(sailboat)); // Object{}
 
-var vscKayak = new Kayak('Nordic', 12);
 console.log(vscKayak); // Kayak {brand: "Nordic", length: 12}
 console.log(Object.getPrototypeOf(vscKayak)); // Kayak {}
 console.log(Kayak.prototype); // Kayak {}
